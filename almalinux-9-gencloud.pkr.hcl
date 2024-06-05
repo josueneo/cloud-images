@@ -143,6 +143,7 @@ build {
     collections_path     = "./ansible/collections"
     roles_path           = "./ansible/roles"
     playbook_file        = "./ansible/gencloud.yml"
+    extra_arguments  = [ "--scp-extra-args", "'-O'" ]
     ansible_env_vars = [
       "ANSIBLE_PIPELINING=True",
       "ANSIBLE_REMOTE_TEMP=/tmp",
