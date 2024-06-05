@@ -1,0 +1,87 @@
+---
+- name: Add coredns user
+  ansible.builtin.user:
+    name: coredns
+    shell: /bin/false
+
+
+- name: Create CoreDNS directory 1
+  ansible.builtin.file:
+    path: /etc/coredns
+    state: directory
+    mode: '0755'
+
+- name: Create CoreDNS directory 2
+  ansible.builtin.file:
+    path: /var/lib/coredns
+    state: directory
+    mode: '0755'
+
+- name: Create Destination directory
+  ansible.builtin.file:
+    path: /tmp/coredns
+    state: directory
+    mode: '0755'
+
+- name: Download and Unpack CoreDNS
+  ansible.builtin.unarchive:
+    src: '{{ coredns_url }}'
+    dest: /tmp/coredns/
+    remote_src: true
+
+- name: Install CoreDNS
+  ansible.builtin.copy:
+    src: /tmp/coredns/coredns
+    dest: /usr/bin/coredns
+    remote_src: true
+    mode: '0755'
+
+- name: Install CoreDNS Corefile
+  ansible.builtin.copy:
+    src: files/Corefile
+    dest: /etc/coredns/Corefile
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install db.mty.ohana.local file
+  ansible.builtin.copy:
+    src: files/db.mty.ohana.local
+    dest: /etc/coredns/db.mty.ohana.local
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install db.sec.mty.ohana.local file
+  ansible.builtin.copy:
+    src: files/db.sec.mty.ohana.local
+    dest: /etc/coredns/db.sec.mty.ohana.local
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install CoreDNS Systemd Service Unit
+  ansible.builtin.copy:
+    src: files/coredns.service
+    dest: /etc/systemd/system/coredns.service
+
+- name: Set capability CAP_NET_BIND_SERVICE
+  ansible.builtin.shell:
+    cmd: setcap CAP_NET_BIND_SERVICE=+ep /usr/bin/coredns
+
+#- name: Audit allow coredns
+#  ansible.builtin.shell:
+#    cmd: ausearch -c '(coredns)' --raw | audit2allow -M my-coredns && semodule -X 300 -i my-coredns.pp
+
+- name: Enable CoreDNS service
+  ansible.builtin.systemd_service:
+    name: coredns.service
+    enabled: true
+    masked: no
+
+- name: SystemD daemon reload and CoreDNS Restart
+  ansible.builtin.systemd_service:
+    name: coredns.service
+    state: restarted
+    daemon_reload: true
+  

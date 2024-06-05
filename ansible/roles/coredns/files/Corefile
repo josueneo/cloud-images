@@ -1,0 +1,7 @@
+.:53 {
+  log
+  errors
+  forward . 8.8.8.8
+  file /etc/coredns/db.mty.ohana.local mty.ohana.local
+  file /etc/coredns/db.sec.mty.ohana.local sec.mty.ohana.local
+}

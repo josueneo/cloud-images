@@ -1,9 +1,10 @@
 # An Ansible playbook that configures a Generic Cloud (OpenStack) image
 ---
 - name: AlmaLinux Generic Cloud
-  hosts: default
+  hosts: all
   become: true
 
   roles:
     - gencloud_guest
+    - coredns
     - cleanup_vm

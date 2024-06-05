@@ -1,0 +1,80 @@
+$TTL    604800
+@    IN    SOA    ns1.mty.ohana.local. admin.mty.ohana.local. (
+                 10        ; Serial
+             604800        ; Refresh
+              86400        ; Retry
+            2419200        ; Expire
+             604800 )    ; Negative Cache TTL
+;
+
+; name servers - NS records
+@    IN    NS    ns1
+
+ns1.mty.ohana.local        IN       A         192.168.68.11
+;A
+airflow                    IN       CNAME     ingress-k8s
+almalinux8                 IN       A         192.168.68.120
+almalinux9                 IN       A         192.168.68.119
+appsmith                   IN       CNAME     ingress-k8s
+auth                       IN       CNAME     ingress-k8s
+alertmanager               IN       CNAME     ingress-k8s
+;B
+build                      IN       CNAME     ingress-k8s
+;C
+cloud                      IN       CNAME     ingress-k8s
+centos7                    IN       A         192.168.68.121
+;D
+debian12                   IN       A         192.168.68.127
+dex                        IN       CNAME     ingress-k8s
+;E
+e5cinco                    IN       A         192.168.68.22
+eagle                      IN       A         192.168.68.10
+;F
+falcon                     IN       A         192.168.68.11
+fedorabox                  IN       A         192.168.68.21
+;G
+;H
+harbor                     IN       CNAME     ingress-k8s
+harbor-int                 IN       CNAME     ingress-k8s
+hydra                      IN       CNAME     ingress-k8s
+;I
+ingress-k8s                IN       A         192.168.69.0
+;J
+;K
+keycloak                   IN       CNAME     ingress-k8s
+keys                       IN       CNAME     ingress-k8s
+k3s-secondary              IN       A         192.168.68.122
+;L
+ldap                       IN       CNAME     ingress-k8s
+library                    IN       CNAME     ingress-k8s
+;M
+manager                    IN       CNAME     ingress-k8s
+minio-api                  IN       CNAME     ingress-k8s
+minio-console              IN       CNAME     ingress-k8s
+mariadb                    IN       CNAME     ingress-k8s
+;N
+;O
+odoo                       IN       CNAME     ingress-k8s
+;P
+phpmyadmin                 IN       CNAME     ingress-k8s
+postgresql                 IN       CNAME     ingress-k8s
+print-server               IN       A         192.168.68.20
+prometheus                 IN       CNAME     ingress-k8s
+;Q
+;R
+registry                   IN       CNAME     ingress-k8s
+registry-harbor            IN       CNAME     ingress-k8s
+;S
+siropa-old                 IN       CNAME     ingress-k8s
+siropa-old-db              IN       CNAME     ingress-k8s
+sles15                     IN       A         192.168.68.122
+;T
+token                      IN       CNAME     ingress-k8s
+;U
+ubuntu20                   IN       A         192.168.68.124
+ubuntu22                   IN       A         192.168.68.125
+;V
+;W
+;X
+;Y
+;X
